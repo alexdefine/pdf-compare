@@ -1,0 +1,14 @@
+FROM node:14.15.1
+
+COPY ./package.json /test-app/
+WORKDIR /test-app
+
+RUN apt-get update
+RUN apt-get install imagemagick
+RUN apt-get install -y poppler-utils
+RUN apt-get install -y ghostscript
+RUN npm install
+
+COPY . .
+
+ENTRYPOINT ["npm", "test"]

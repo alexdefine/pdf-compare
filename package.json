@@ -1,0 +1,21 @@
+{
+  "name": "pdf-compare",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./test",
+    "build": "docker build --rm -t pdf-compare:latest -f Dockerfile .",
+    "run-compare": "docker run -v \"$(pwd)/actual:/test-app/actual\" -v \"$(pwd)/expected:/test-app/expected\" -v \"$(pwd)/diffs:/test-app/diffs\" -it -i pdf-compare:latest",
+    "build-test": "docker build --rm -t pdf-compare-test:latest -f Dockerfile.test .",
+    "run-test": "docker run -v \"$(pwd)/actual:/test-app/actual\" -v \"$(pwd)/expected:/test-app/expected\" -v \"$(pwd)/diffs:/test-app/diffs\" -it -i pdf-compare-test:latest"
+  },
+  "author": "Oleksandr Pidhainyi",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.2.1",
+    "pdf-image": "^2.0.0",
+    "pixelmatch": "^5.2.1"
+  }
+}
