@@ -1,0 +1,17 @@
+FROM node:14.15.1
+
+RUN apt-get update
+RUN apt-get install imagemagick
+RUN apt-get install -y poppler-utils
+RUN apt-get install -y ghostscript
+RUN git clone https://github.com/alexdefine/pdf-compare.git
+RUN cd pdf-compare
+
+COPY ./package.json /test-app/
+WORKDIR /test-app
+
+RUN npm install
+
+COPY . .
+
+ENTRYPOINT ["node", "index.js"]
